@@ -24,6 +24,12 @@ Change spacing, placement and backgrounds of the top and bottom workspace indica
 
 ![Screenshot of customized workspace indicators](https://raw.githubusercontent.com/MihkelMK/zen-mods/refs/heads/main/workspace_indicator_tweaks/image.jpg)
 
+## Responsive Settings Sidebar
+
+Collapse settings sidebar into icons only with a floating search box on smaller screens.
+
+![Screenshot of collapsed settings sidebar](https://raw.githubusercontent.com/MihkelMK/zen-mods/refs/heads/main/responsive_settings_sidebar/image.jpg)
+
 ## Cleaner Downloads
 
 Change spacing and remove borders in the recent downloads menu.
