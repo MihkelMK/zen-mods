@@ -8,7 +8,7 @@ Customize how container tabs are displayed:
 
 I didn't like the way essential tabs opened in containers looked so I made this collection of options as a solution.
 
-![Screenshot of customized tabs](https://raw.githubusercontent.com/MihkelMK/zen-mods/refs/heads/main/container_tab_tweaks/image.jpg)
+![Screenshot of customized tabs](https://raw.githubusercontent.com/MihkelMK/zen-mods/refs/heads/main/container_tab_tweaks/image.png)
 
 ## Preferences
 
