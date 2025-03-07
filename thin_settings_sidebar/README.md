@@ -1,4 +1,4 @@
-# Responsive Settings Sidebar
+# Thin Settings Sidebar
 
 Collapse settings sidebar into icons only with a floating search box on smaller screens.
 
@@ -7,4 +7,4 @@ For me, it was a pretty much constant state as I tend to use a two pane vertical
 
 Took inspiration from the way Firefox handles this with the exception of a floating search bar as it better fit Zen's aesthetic.
 
-![Screenshot of collapsed settings sidebar](https://raw.githubusercontent.com/MihkelMK/zen-mods/refs/heads/main/responsive_settings_sidebar/image.png)
+![Screenshot of collapsed settings sidebar](https://raw.githubusercontent.com/MihkelMK/zen-mods/refs/heads/main/thin_settings_sidebar/image.png)

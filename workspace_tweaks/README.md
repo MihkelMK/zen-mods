@@ -1,8 +1,8 @@
-# Workspace Indicator Tweaks
+# Workspace Tweaks
 
 Change spacing, placement and backgrounds of the top and bottom workspace indicators.
 
-![Screenshot of customized workspace indicators](https://raw.githubusercontent.com/MihkelMK/zen-mods/refs/heads/main/workspace_indicator_tweaks/image.png)
+![Screenshot of customized workspace indicators](https://raw.githubusercontent.com/MihkelMK/zen-mods/refs/heads/main/workspace_tweaks/image.png)
 
 ## Options
 

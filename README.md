@@ -18,17 +18,17 @@ Customize how container tabs are displayed:
 
 ![Screenshot of customized tabs](https://raw.githubusercontent.com/MihkelMK/zen-mods/refs/heads/main/container_tab_tweaks/image.png)
 
-## Workspace Indicator Tweaks
+## Workspace Tweaks
 
 Change spacing, placement and backgrounds of the top and bottom workspace indicators.
 
-![Screenshot of customized workspace indicators](https://raw.githubusercontent.com/MihkelMK/zen-mods/refs/heads/main/workspace_indicator_tweaks/image.png)
+![Screenshot of customized workspace indicators](https://raw.githubusercontent.com/MihkelMK/zen-mods/refs/heads/main/workspace_tweaks/image.png)
 
-## Responsive Settings Sidebar
+## Thin Settings Sidebar
 
 Collapse settings sidebar into icons only with a floating search box on smaller screens.
 
-![Screenshot of collapsed settings sidebar](https://raw.githubusercontent.com/MihkelMK/zen-mods/refs/heads/main/responsive_settings_sidebar/image.png)
+![Screenshot of collapsed settings sidebar](https://raw.githubusercontent.com/MihkelMK/zen-mods/refs/heads/main/thin_settings_sidebar/image.png)
 
 ## Cleaner Downloads
 
