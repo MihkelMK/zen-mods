@@ -10,11 +10,7 @@ Change pinned tabs to a horizontal list of icons.
 
 ## Container Tab Tweaks
 
-Customize how container tabs are displayed:
-
-- Align to the right
-- Make it an underline
-- Different choices for expanded vs compacted
+Customize when and where the tab container indicator is displayed.
 
 ![Screenshot of customized tabs](https://raw.githubusercontent.com/MihkelMK/zen-mods/refs/heads/main/container_tab_tweaks/image.png)
 

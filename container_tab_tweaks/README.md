@@ -1,6 +1,6 @@
 # Container Tab Tweaks
 
-Customize how container tabs are displayed:
+Customize when and where the tab container indicator is displayed.
 
 - Align to the right
 - Make it an underline
