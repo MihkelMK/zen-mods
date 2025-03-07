@@ -3,8 +3,9 @@
     margin-top: calc(var(--zen-element-separation) * 1) !important;
   }
 
+  /* Used display: none; at first, that broke compact tab view */
   #zen-sidebar-top-buttons {
-    display: none !important;
+    margin-bottom: calc(var(--zen-toolbar-height) * -1);
   }
 }
 
