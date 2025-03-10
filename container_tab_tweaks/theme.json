@@ -1,0 +1,16 @@
+{
+  "id": "15ba7535-75ab-4a1d-ae2b-20ae88047b15",
+  "name": "Container Tab Tweaks",
+  "description": "Customize when and where the tab container indicator is displayed.",
+  "homepage": "https://github.com/MihkelMK/zen-mods/tree/main/container_tab_tweaks",
+  "style": "https://raw.githubusercontent.com/MihkelMK/zen-mods/main/container_tab_tweaks/chrome.css",
+  "readme": "https://raw.githubusercontent.com/MihkelMK/zen-mods/main/container_tab_tweaks/readme.md",
+  "image": "https://raw.githubusercontent.com/MihkelMK/zen-mods/main/container_tab_tweaks/image.png",
+  "author": "MihkelMK",
+  "version": "1.0.0",
+  "tags": [],
+  "createdAt": "2025-03-07",
+  "updatedAt": "2025-03-07",
+  "preferences": "https://raw.githubusercontent.com/MihkelMK/zen-mods/main/container_tab_tweaks/preferences.json",
+  "enabled": false
+}
