@@ -27,7 +27,7 @@
 
 /* THICKNESS SETTINGS */
 :root {
-  :has(#theme-Container-Tab-Tweaks[uc-container-tweaks-width="thin"]) {
+  &:has(#theme-Container-Tab-Tweaks[uc-container-tweaks-width="thin"]) {
     --container-line-thickness: 2px;
   }
 
