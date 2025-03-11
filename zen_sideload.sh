@@ -13,7 +13,6 @@
 #   - description                                        #
 #   - version (MAYOR.MINOR.PATCH)                        #
 ##########################################################
-
 ##################    INFO FOR USERS    ##################
 # - jq is REQUIRED for this script to work               #
 # - You need to manually enable mods after install       #
