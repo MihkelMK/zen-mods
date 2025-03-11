@@ -1,27 +1,40 @@
 #!/bin/bash
 
-##########################################################
-#          -* Zen Mods Sideloader - MihkelMK *-          #
-#                   ------------------                   #
-#         Some code is generated with Claude 3.7         #
-##########################################################
-#################    INFO FOR MODDERS    #################
-# - Mods need to be in sibling subdirectories            #
-# - Mods need to have theme.json with the following:     #
-#   - id (uuidv4)                                        #
-#   - title                                              #
-#   - description                                        #
-#   - version (MAYOR.MINOR.PATCH)                        #
-##########################################################
-##################    INFO FOR USERS    ##################
-# - jq is REQUIRED for this script to work               #
-# - You need to manually enable mods after install       #
-# - How to find your profile directory:                  #
-#   1. Go to about:profiles in your browser              #
-#   2. Find "This is the profile you use... be deleted." #
-#   3. Use the Root Directory of that Profile            #
-#      - I suggest making a backup of that directory     #
-##########################################################
+############################################################
+#           -* Zen Mods Sideloader - MihkelMK *-           #
+#                    ------------------                    #
+#          Some code is generated with Claude 3.7          #
+############################################################
+##################    INFO FOR MODDERS    ##################
+# - Mods need to be in sibling subdirectories with files:  #
+# - chrome.css: The mod itself; styling alterations        #
+# - preferences.json: Settings for the user     [optional] #
+# - theme.json: Zen mod spec with the following data:      #
+#   - id (uuidv4)                               [required] #
+#   - name (max 25 characters)                  [required] #
+#   - description (max 100 characters)          [required] #
+#   - version (MAYOR.MINOR.PATCH)               [required] #
+#   - style (public link to chrome.css file)    [required] #
+#   - preferences (public link to preferences.json file)   #
+#   - homepage (public link to theme source)               #
+#   - readme (public link to theme documentation)          #
+#   - image (link to thumbnail used in Zen Mods website)   #
+#   - author (name of the author)                          #
+#   - tags (array of strings; mostly unused)               #
+#   - createdAt (ISO date of first release)                #
+#   - updatedAt (ISO date of current release)              #
+#                    ------------------                    #
+#   Use --dev for easier mod development (uses symlinks)   #
+############################################################
+###################    INFO FOR USERS    ###################
+# - jq is REQUIRED for this script to work                 #
+# - Press "Check for Updates" in Zen to complete install   #
+# - How to find your profile directory:                    #
+#   1. Go to about:profiles in your browser                #
+#   2. Find "This is the profile you use... be deleted."   #
+#   3. Use the Root Directory of that Profile              #
+#      - I suggest making a backup of that directory       #
+############################################################
 
 # Colors
 BOLD='\033[1m'
@@ -33,7 +46,11 @@ PURPLE='\033[0;35m'
 CYAN='\033[0;36m'
 WHITE='\033[0;37m'
 GREY='\033[0;90m'
+ORANGE='\033[0;33m'
 NC='\033[0m' # No Color
+
+# Default to non-dev mode
+DEV_MODE=false
 
 # Check if jq is installed
 if ! command -v jq &>/dev/null; then
@@ -41,13 +58,26 @@ if ! command -v jq &>/dev/null; then
     exit 1
 fi
 
+# Parse arguments
+PROFILE_PATH=""
+while [[ $# -gt 0 ]]; do
+    case $1 in
+    --dev)
+        DEV_MODE=true
+        shift
+        ;;
+    *)
+        PROFILE_PATH="$1"
+        shift
+        ;;
+    esac
+done
+
 # Check if a path argument is provided
-if [ "$#" -ne 1 ]; then
-    echo -e "${BOLD}${YELLOW}Usage:${NC} $0 <path_to_profile_dir>"
+if [ -z "$PROFILE_PATH" ]; then
+    echo -e "${BOLD}${YELLOW}Usage:${NC} $0 [--dev] <path_to_profile_dir>"
     exit 1
 fi
-
-PROFILE_PATH="$1"
 
 # Check if the provided path exists
 if [ ! -d "$PROFILE_PATH" ]; then
@@ -73,8 +103,12 @@ declare -a FAILED
 declare -a UNCHANGED
 
 echo ""
-echo -e "${BOLD}${GREEN}:: ${WHITE}Zen Mods Sideloader${NC}"
-echo -e "${BOLD}${CYAN}==============================================${NC}"
+echo -en "${BOLD}${GREEN}:: ${WHITE}Zen Mods Sideloader${NC}"
+if [ "$DEV_MODE" = true ]; then
+    echo -en " ${BOLD}${ORANGE}[Developer Mode Enabled]${NC}"
+
+fi
+echo -e "\n${BOLD}${CYAN}==============================================${NC}"
 echo ""
 
 # Counter for indexing themes
@@ -97,11 +131,17 @@ for THEME_FILE in $THEME_FILES; do
     THEME_DESCRIPTIONS[COUNT]="$THEME_DESC"
     THEME_VERSIONS[COUNT]="$THEME_VERSION"
 
-    # Check if symlink already exists
+    # Check if theme is in zen-themes.json
     DEST_DIR="$PROFILE_PATH/chrome/zen-themes/$THEME_ID"
+    ZEN_THEMES_JSON="$PROFILE_PATH/zen-themes.json"
     INSTALLED_STATUS=""
-    if [ -L "$DEST_DIR" ]; then
+
+    if [ -f "$ZEN_THEMES_JSON" ] && jq -e ".\"$THEME_ID\"" "$ZEN_THEMES_JSON" >/dev/null 2>&1; then
         INSTALLED_STATUS="(Installed)"
+        # Check if there's also a symlink (dev mode)
+        if [ -L "$DEST_DIR" ]; then
+            INSTALLED_STATUS="(Installed) ${ORANGE}[dev]${NC}"
+        fi
     fi
 
     # Display theme information with index in yay style
@@ -140,7 +180,12 @@ fi
 
 # Count the number of themes to install
 NUM_TO_INSTALL=$(echo "$SELECTIONS" | wc -w)
-echo -e "\n${BOLD}${GREEN}::${NC} Preparing to install ${GREEN}$NUM_TO_INSTALL${NC} mods"
+echo -en "\n${BOLD}${GREEN}::${NC} Preparing to install ${GREEN}$NUM_TO_INSTALL${NC} mods as "
+if [ "$DEV_MODE" = true ]; then
+    echo -e "${BOLD}${ORANGE}[Developer Mode]${NC}: Creating symlinks, adding as disabled${NC}"
+else
+    echo -e "${BOLD}${BLUE}[User Mode]${NC}: No symlinks, adding as enabled${NC}"
+fi
 
 # Validate and process user selections
 INSTALLED_COUNT=0
@@ -181,38 +226,70 @@ for SEL in $SELECTIONS; do
     # The destination for the symbolic link
     DEST_DIR="$PROFILE_PATH/chrome/zen-themes/$THEME_ID"
 
-    # Check if the destination directory already exists
-    if [ -L "$DEST_DIR" ] || [ -d "$DEST_DIR" ]; then
-        echo -ne "   ${YELLOW}Theme link already exists.${NC} ${BOLD}Overwrite? [y/N]${NC} "
+    # Check if there's an existing installation and handle it according to mode
+    if [ -L "$DEST_DIR" ] && [ "$DEV_MODE" = false ]; then
+        # Mod was previously installed in dev mode (has symlink) but now we're in non-dev mode
+        echo -e "   ${YELLOW}Theme exists in dev mode (with symlink).${NC}"
+        echo -ne "   ${BOLD}Convert to normal installation? [Y/n]${NC} "
         read -r OVERWRITE
 
-        if [[ "$OVERWRITE" =~ ^[nN]$ ]]; then
-            echo -e "   ${BOLD}${BLUE}info:${NC} Skipped ${WHITE}${THEME_NAME}${NC}"
-            UNCHANGED[UNCHANGED_COUNT]="${THEME_NAME}"
-            ((UNCHANGED_COUNT++))
+        if ! [[ "$OVERWRITE" =~ ^[Nn]$ ]]; then
+            # Remove the symlink
+            rm -rf "$DEST_DIR"
+            echo -e "   ${BOLD}${BLUE}info:${NC} Removed dev mode symlink for ${WHITE}${THEME_NAME}${NC}"
+            echo -e "   ${BOLD}${ORANGE}important:${NC} You will need to press \"Check for Updates\" in the Zen Mods page"
+        else
+            echo -e "   ${BOLD}${BLUE}info:${NC} Keeping dev mode installation for ${WHITE}${THEME_NAME}${NC}"
+        fi
+    elif [ -f "$ZEN_THEMES_JSON" ] && jq -e ".[\"$THEME_ID\"]" "$ZEN_THEMES_JSON" >/dev/null 2>&1 && [ ! -L "$DEST_DIR" ] && [ "$DEV_MODE" = true ]; then
+        # Mod was previously installed in non-dev mode but now we're in dev mode
+        echo -e "   ${YELLOW}Theme exists in normal mode (without symlink).${NC}"
+        echo -ne "   ${BOLD}Convert to dev mode installation? [Y/n]${NC} "
+        read -r OVERWRITE
 
-            # Check if the theme is already in zen-themes.json
-            if [ -f "$PROFILE_PATH/zen-themes.json" ]; then
-                if jq -e ".\"$THEME_ID\"" "$PROFILE_PATH/zen-themes.json" >/dev/null 2>&1; then
+        if ! [[ "$OVERWRITE" =~ ^[Nn]$ ]]; then
+            # Remove installed files
+            rm -rf "$DEST_DIR"
+
+            # Create the symbolic link
+            if ! ln -s "$MOD_DIR" "$DEST_DIR"; then
+                echo -e "   ${BOLD}${RED}error:${NC} Failed to create symbolic link for ${WHITE}${THEME_NAME}${NC}"
+                FAILED[FAILED_COUNT]=${THEME_NAME}
+                ((FAILED_COUNT++))
+                continue
+            fi
+            echo -e "   ${BOLD}${BLUE}info:${NC} Created dev mode symlink for ${WHITE}${THEME_NAME}${NC}"
+        else
+            echo -e "   ${BOLD}${BLUE}info:${NC} Keeping normal mode installation for ${WHITE}${THEME_NAME}${NC}"
+        fi
+    elif [ "$DEV_MODE" = true ]; then
+        # Handle symlinks in dev mode (when not transitioning from non-dev)
+        if [ -L "$DEST_DIR" ] || [ -d "$DEST_DIR" ]; then
+            echo -ne "   ${YELLOW}Theme link already exists.${NC} ${BOLD}Overwrite? [y/N]${NC} "
+            read -r OVERWRITE
+
+            if [[ "$OVERWRITE" =~ ^[Yy]$ ]]; then
+                # User wants to overwrite, remove existing link or directory first
+                rm -rf "$DEST_DIR"
+
+                # Create the symbolic link
+                if ! ln -s "$MOD_DIR" "$DEST_DIR"; then
+                    echo -e "   ${BOLD}${RED}error:${NC} Failed to create symbolic link for ${WHITE}${THEME_NAME}${NC}"
+                    FAILED[FAILED_COUNT]=${THEME_NAME}
+                    ((FAILED_COUNT++))
                     continue
                 fi
+            else
+                echo -e "   ${BOLD}${BLUE}info:${NC} Symlink for ${WHITE}${THEME_NAME}${NC} left unchanged"
             fi
-
-            # If we're here, we need to add to json but not create symlink
-            echo -e "   ${BOLD}${BLUE}info:${NC} Adding theme to zen-themes.json without creating a new symlink"
         else
-            # User wants to overwrite, remove existing link or directory first
-            rm -rf "$DEST_DIR"
-        fi
-    fi
-
-    # Create the symbolic link if it doesn't exist or user wants to overwrite
-    if [[ ! -L "$DEST_DIR" && ! -d "$DEST_DIR" ]] || [[ ! "$OVERWRITE" =~ ^[Yy]$ ]]; then
-        if ! ln -s "$MOD_DIR" "$DEST_DIR"; then
-            echo -e "   ${BOLD}${RED}error:${NC} Failed to create symbolic link for ${WHITE}${THEME_NAME}${NC}"
-            FAILED[FAILED_COUNT]=${THEME_NAME}
-            ((FAILED_COUNT++))
-            continue
+            # Create the symbolic link
+            if ! ln -s "$MOD_DIR" "$DEST_DIR"; then
+                echo -e "   ${BOLD}${RED}error:${NC} Failed to create symbolic link for ${WHITE}${THEME_NAME}${NC}"
+                FAILED[FAILED_COUNT]=${THEME_NAME}
+                ((FAILED_COUNT++))
+                continue
+            fi
         fi
     fi
 
@@ -234,20 +311,24 @@ for SEL in $SELECTIONS; do
     THEME_JSON=$(cat "$MOD_DIR/theme.json")
     TMP_FILE=$(mktemp)
 
-    # Check if theme isn't loaded into the browser
+    # Check if theme isn't already in zen-themes.json
     if ! jq -e ".[\"$THEME_ID\"]" "$ZEN_THEMES_JSON" &>/dev/null; then
-        # Theme doesn't exist - add it with enabled:false
-
-        # First modify the theme JSON to set enabled to false
-        # Add preferences:true if preferences.json exists
-        if [ -f "$MOD_DIR/preferences.json" ]; then
-            THEME_JSON_DISABLED=$(echo "$THEME_JSON" | jq '. + {"enabled": false, "preferences": true}')
+        # Theme doesn't exist - add it with enabled based on mode
+        if [ "$DEV_MODE" = true ]; then
+            # Add with enabled:false in dev mode
+            THEME_JSON_MODIFIED=$(echo "$THEME_JSON" | jq '. + {"enabled": false}')
+            STATUS_MSG="disabled by default"
         else
-            THEME_JSON_DISABLED=$(echo "$THEME_JSON" | jq '. + {"enabled": false}')
+            # Add without enabled property in user mode (will be enabled by default)
+            THEME_JSON_MODIFIED="$THEME_JSON"
+            STATUS_MSG="enabled by default"
         fi
 
-        if jq --argjson theme "$THEME_JSON_DISABLED" ". + {\"$THEME_ID\": \$theme}" "$ZEN_THEMES_JSON" >"$TMP_FILE" && mv "$TMP_FILE" "$ZEN_THEMES_JSON"; then
-            echo -e "   ${BOLD}${GREEN}success:${NC} Installed ${WHITE}${THEME_NAME}${NC} (disabled by default)"
+        if jq --argjson theme "$THEME_JSON_MODIFIED" ". + {\"$THEME_ID\": \$theme}" "$ZEN_THEMES_JSON" >"$TMP_FILE" && mv "$TMP_FILE" "$ZEN_THEMES_JSON"; then
+            echo -e "   ${BOLD}${GREEN}success:${NC} Installed ${WHITE}${THEME_NAME}${NC} ($STATUS_MSG)"
+            if [ "$DEV_MODE" = false ]; then
+                echo -e "   ${BOLD}${ORANGE}important:${NC} You will need to press \"Check for Updates\" in the Zen Mods page"
+            fi
             INSTALLED[INSTALLED_COUNT]=${THEME_NAME}
             ((INSTALLED_COUNT++))
         else
@@ -255,11 +336,17 @@ for SEL in $SELECTIONS; do
             FAILED[FAILED_COUNT]=${THEME_NAME}
             ((FAILED_COUNT++))
         fi
+    else
+        UNCHANGED[UNCHANGED_COUNT]="${THEME_NAME}"
+        ((UNCHANGED_COUNT++))
     fi
 done
 
 echo ""
 echo -e "${BOLD}${GREEN}:: ${WHITE}Installation complete${NC}"
+if [ "$DEV_MODE" = false ] && [ $INSTALLED_COUNT -gt 0 ]; then
+    echo -e "\n${BOLD}${ORANGE}important:${NC} Remember to press \"Check for Updates\" in the Zen Mods page to apply changes"
+fi
 if [ $INSTALLED_COUNT -gt 0 ]; then
     echo -e "\n${BOLD}${GREEN}$INSTALLED_COUNT${NC} themes installed successfully:"
     for ((i = 0; i < INSTALLED_COUNT; i++)); do
