@@ -7,12 +7,13 @@
 ##########################################################
 #################    INFO FOR MODDERS    #################
 # - Mods need to be in sibling subdirectories            #
-# - Mods need to have chrome.css, theme.json             #
-# - chrome.css (and preferences.json if used)            #
-#   need to be publicly hosted (ex. on GitHub)           #
-# - Add "enabled: false" to theme.json to sync GUI       #
-#   on first load (otherwise it looks enabled but isn't) #
+# - Mods need to have theme.json with the following:     #
+#   - id (uuidv4)                                        #
+#   - title                                              #
+#   - description                                        #
+#   - version (MAYOR.MINOR.PATCH)                        #
 ##########################################################
+
 ##################    INFO FOR USERS    ##################
 # - jq is REQUIRED for this script to work               #
 # - You need to manually enable mods after install       #
@@ -183,7 +184,7 @@ for SEL in $SELECTIONS; do
 
     # Check if the destination directory already exists
     if [ -L "$DEST_DIR" ] || [ -d "$DEST_DIR" ]; then
-        echo -ne "   ${YELLOW}Theme link already exists.${NC} ${BOLD}Overwrite? [Y/n]${NC} "
+        echo -ne "   ${YELLOW}Theme link already exists.${NC} ${BOLD}Overwrite? [y/N]${NC} "
         read -r OVERWRITE
 
         if [[ "$OVERWRITE" =~ ^[nN]$ ]]; then
@@ -194,7 +195,6 @@ for SEL in $SELECTIONS; do
             # Check if the theme is already in zen-themes.json
             if [ -f "$PROFILE_PATH/zen-themes.json" ]; then
                 if jq -e ".\"$THEME_ID\"" "$PROFILE_PATH/zen-themes.json" >/dev/null 2>&1; then
-                    echo -e "   ${BOLD}${BLUE}info:${NC} Theme is already in zen-themes.json"
                     continue
                 fi
             fi
@@ -208,7 +208,7 @@ for SEL in $SELECTIONS; do
     fi
 
     # Create the symbolic link if it doesn't exist or user wants to overwrite
-    if [[ ! -L "$DEST_DIR" && ! -d "$DEST_DIR" ]] || [[ ! "$OVERWRITE" =~ ^[Nn]$ ]]; then
+    if [[ ! -L "$DEST_DIR" && ! -d "$DEST_DIR" ]] || [[ ! "$OVERWRITE" =~ ^[Yy]$ ]]; then
         if ! ln -s "$MOD_DIR" "$DEST_DIR"; then
             echo -e "   ${BOLD}${RED}error:${NC} Failed to create symbolic link for ${WHITE}${THEME_NAME}${NC}"
             FAILED[FAILED_COUNT]=${THEME_NAME}
@@ -235,25 +235,20 @@ for SEL in $SELECTIONS; do
     THEME_JSON=$(cat "$MOD_DIR/theme.json")
     TMP_FILE=$(mktemp)
 
-    # Check if theme already exists
-    if jq -e ".[\"$THEME_ID\"]" "$ZEN_THEMES_JSON" &>/dev/null; then
-        # Theme exists - check if we should overwrite
-        if ! [[ "$OVERWRITE" =~ ^[nN]$ ]]; then
-            # Overwrite the existing theme
-            if jq --argjson theme "$THEME_JSON" ".\"$THEME_ID\" = \$theme" "$ZEN_THEMES_JSON" >"$TMP_FILE" && mv "$TMP_FILE" "$ZEN_THEMES_JSON"; then
-                echo -e "   ${BOLD}${GREEN}success:${NC} Updated ${WHITE}${THEME_NAME}${NC}"
-                INSTALLED[INSTALLED_COUNT]=${THEME_NAME}
-                ((INSTALLED_COUNT++))
-            else
-                echo -e "   ${BOLD}${YELLOW}warning:${NC} Failed to update zen-themes.json for ${WHITE}${THEME_NAME}${NC}"
-                FAILED[FAILED_COUNT]=${THEME_NAME}
-                ((FAILED_COUNT++))
-            fi
+    # Check if theme isn't loaded into the browser
+    if ! jq -e ".[\"$THEME_ID\"]" "$ZEN_THEMES_JSON" &>/dev/null; then
+        # Theme doesn't exist - add it with enabled:false
+
+        # First modify the theme JSON to set enabled to false
+        # Add preferences:true if preferences.json exists
+        if [ -f "$MOD_DIR/preferences.json" ]; then
+            THEME_JSON_DISABLED=$(echo "$THEME_JSON" | jq '. + {"enabled": false, "preferences": true}')
+        else
+            THEME_JSON_DISABLED=$(echo "$THEME_JSON" | jq '. + {"enabled": false}')
         fi
-    else
-        # Theme doesn't exist - add it
-        if jq --argjson theme "$THEME_JSON" ". + {\"$THEME_ID\": \$theme}" "$ZEN_THEMES_JSON" >"$TMP_FILE" && mv "$TMP_FILE" "$ZEN_THEMES_JSON"; then
-            echo -e "   ${BOLD}${GREEN}success:${NC} Installed ${WHITE}${THEME_NAME}${NC}"
+
+        if jq --argjson theme "$THEME_JSON_DISABLED" ". + {\"$THEME_ID\": \$theme}" "$ZEN_THEMES_JSON" >"$TMP_FILE" && mv "$TMP_FILE" "$ZEN_THEMES_JSON"; then
+            echo -e "   ${BOLD}${GREEN}success:${NC} Installed ${WHITE}${THEME_NAME}${NC} (disabled by default)"
             INSTALLED[INSTALLED_COUNT]=${THEME_NAME}
             ((INSTALLED_COUNT++))
         else
