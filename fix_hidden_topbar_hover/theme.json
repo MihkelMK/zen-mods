@@ -1,7 +1,7 @@
 {
   "id": "52b3aaf6-ff5d-11ef-8f34-6b40ca385589",
-  "name": "Don't reveal the top bar when hovered in the \"Single toolbar\" layout",
-  "description": "blabla.",
+  "name": "Fix Hidden Topbar Hover",
+  "description": "Don't reveal the top bar when hovered in the \"Single toolbar\" layout",
   "homepage": "https://github.com/MihkelMK/zen-mods/tree/main/fix_hidden_topbar_hover",
   "style": "https://raw.githubusercontent.com/MihkelMK/zen-mods/main/fix_hidden_topbar_hover/chrome.css",
   "readme": "https://raw.githubusercontent.com/MihkelMK/zen-mods/main/fix_hidden_topbar_hover/readme.md",
