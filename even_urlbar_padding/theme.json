@@ -10,5 +10,6 @@
   "version": "1.0.0",
   "tags": [],
   "createdAt": "2025-03-07",
-  "updatedAt": "2025-03-07"
+  "updatedAt": "2025-03-07",
+  "preferences": "https://raw.githubusercontent.com/MihkelMK/zen-mods/main/even_urlbar_padding/preferences.json"
 }
