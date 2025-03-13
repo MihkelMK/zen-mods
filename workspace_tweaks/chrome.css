@@ -1,11 +1,15 @@
 @media (-moz-bool-pref: "uc.workspace-tweaks.top-pad-rm") {
-  #titlebar {
-    margin-top: calc(var(--zen-element-separation) * 1) !important;
-  }
+  /* This style is only needed with Multiple toolbar layout  */
+  /* in which case #nav-bar is in #zen-appcontent-wrapper instead */
+  #navigator-toolbox:not(:has(#nav-bar)) {
+    & #titlebar {
+      margin-top: calc(var(--zen-element-separation) * 1) !important;
+    }
 
-  /* Used display: none; at first, that broke compact tab view */
-  #zen-sidebar-top-buttons {
-    margin-bottom: calc(var(--zen-toolbar-height) * -1);
+    /* Used display: none; at first, that broke compact tab view */
+    & #zen-sidebar-top-buttons {
+      margin-bottom: calc(var(--zen-toolbar-height) * -1);
+    }
   }
 }
 
