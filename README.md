@@ -62,3 +62,9 @@ Inspired by [Cleaner Extension Menu - Zen Mods](https://zen-browser.app/mods/1e8
 Don't reveal the top bar when hovered in the "Single toolbar" layout
 
 ![Screenshot of topbar appearing when hovered](https://raw.githubusercontent.com/MihkelMK/zen-mods/refs/heads/main/fix_hidden_topbar_hover/image.png)
+
+## Even URLbar Padding
+
+Fix spacing of icons and URL in the top bar
+
+![Screenshot of modified top URL bar](https://raw.githubusercontent.com/MihkelMK/zen-mods/refs/heads/main/even_urlbar_padding/image.png)

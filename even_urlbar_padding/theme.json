@@ -1,0 +1,14 @@
+{
+  "id": "97df07fe-ffd7-11ef-9bae-8f59bf0ca2fe",
+  "name": "Even URLbar Padding",
+  "description": "Fix spacing of icons and URL in the top bar",
+  "homepage": "https://github.com/MihkelMK/zen-mods/tree/main/even_urlbar_padding",
+  "style": "https://raw.githubusercontent.com/MihkelMK/zen-mods/main/even_urlbar_padding/chrome.css",
+  "readme": "https://raw.githubusercontent.com/MihkelMK/zen-mods/main/even_urlbar_padding/readme.md",
+  "image": "https://raw.githubusercontent.com/MihkelMK/zen-mods/main/even_urlbar_padding/image.png",
+  "author": "MihkelMK",
+  "version": "1.0.0",
+  "tags": [],
+  "createdAt": "2025-03-07",
+  "updatedAt": "2025-03-07"
+}

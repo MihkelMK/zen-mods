@@ -1,0 +1,30 @@
+#urlbar hbox.urlbar-input-container {
+  --urlbar-even-padding: var(--urlbar-icon-padding);
+
+  @media (-moz-bool-pref: "uc.even_urlbar.halfpadding") {
+    --urlbar-even-padding: calc(var(--urlbar-icon-padding) / 2);
+  }
+
+  /* Add button padding as the URL bar inline padding */
+  padding: var(--urlbar-container-padding) var(--urlbar-even-padding) !important;
+
+  /* Consistent padding for all URL bar elements */
+  & .urlbar-input-box,
+  #identity-box > box,
+  #tracking-protection-icon-container > box,
+  #page-action-buttons > hbox {
+    padding-inline: var(--urlbar-even-padding) !important;
+  }
+
+  /* Reset the limited with to not overflow with the added padding */
+  & #tracking-protection-icon-box,
+  #page-action-buttons hbox {
+    width: unset !important;
+  }
+
+  /* We replace this with the padding, remove */
+  & #userContext-icons,
+  #urlbar-zoom-button {
+    margin-inline: 0 !important;
+  }
+}

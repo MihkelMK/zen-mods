@@ -1,0 +1,7 @@
+[
+  {
+    "property": "uc.even_urlbar.halfpadding",
+    "label": "Make padding smaller",
+    "type": "checkbox"
+  }
+]
