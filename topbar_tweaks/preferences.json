@@ -1,11 +1,5 @@
 [
   {
-    "property": "uc.topbar-tweaks.fix-hover",
-    "label": "Don't reveal the top bar when hovered in the ''Single toolbar' layout",
-    "type": "checkbox",
-    "disabledOn": []
-  },
-  {
     "property": "uc.topbar-tweaks.url-padding",
     "label": "Consistent and even padding for URL bar",
     "type": "checkbox",
