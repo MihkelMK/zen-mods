@@ -1,36 +1,24 @@
 [
   {
-    "property": "uc.workspace-tweaks.bottom-essentials",
+    "property": "uc.sidebar-tweaks.bottom-essentials",
     "label": "Turn on if you have Bottom Essentials installed",
     "type": "checkbox",
     "disabledOn": []
   },
   {
-    "property": "zen.workspaces.show-workspace-indicator",
-    "label": "Shows the workspace-indicator above Pins.",
-    "type": "checkbox",
-    "disabledOn": []
-  },
-  {
-    "property": "uc.workspace-tweaks.top-center",
-    "label": "Center top workspace-indicator label.",
-    "type": "checkbox",
-    "disabledOn": []
-  },
-  {
-    "property": "uc.workspace-tweaks.sidebar-flush",
+    "property": "uc.sidebar-tweaks.sidebar-flush",
     "label": "Make sidebar flush with navigation bar",
     "type": "checkbox",
     "disabledOn": []
   },
   {
-    "property": "uc.workspace-tweaks.sidebar-margin",
+    "property": "uc.sidebar-tweaks.sidebar-margin",
     "label": "Add top margin to sidebar (Useful with NavBar Margin mod)",
     "type": "checkbox",
     "disabledOn": []
   },
   {
-    "property": "uc.workspace-tweaks.bottom-style",
+    "property": "uc.sidebar-tweaks.bottom-style",
     "label": "Change styling of bottom workspace and settings bar (try with media player)",
     "type": "dropdown",
     "placeholder": "Zen Default",
@@ -46,5 +34,17 @@
         "value": "compact"
       }
     ]
+  },
+  {
+    "property": "zen.workspaces.show-workspace-indicator",
+    "label": "Shows the workspace-indicator above Pins.",
+    "type": "checkbox",
+    "disabledOn": []
+  },
+  {
+    "property": "uc.sidebar-tweaks.top-indicator-align-center",
+    "label": "Center top workspace-indicator label.",
+    "type": "checkbox",
+    "disabledOn": []
   }
 ]

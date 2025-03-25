@@ -37,11 +37,11 @@ Customize when and where the tab container indicator is displayed.
 
 ![Screenshot of customized tabs](https://raw.githubusercontent.com/MihkelMK/zen-mods/refs/heads/main/container_tab_tweaks/image.png)
 
-### Workspace Tweaks
+### Sidebar Tweaks
 
-Change spacing, placement and backgrounds of the top and bottom workspace indicators.
+Toggleable tweaks for the sidebar
 
-![Screenshot of customized workspace indicators](https://raw.githubusercontent.com/MihkelMK/zen-mods/refs/heads/main/workspace_tweaks/image.png)
+![Screenshot of customized workspace indicators](https://raw.githubusercontent.com/MihkelMK/zen-mods/refs/heads/main/sidebar_tweaks/image.png)
 
 ### Thin Settings Sidebar
 

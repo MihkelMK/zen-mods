@@ -1,0 +1,15 @@
+{
+  "id": "e6f56814-6209-413f-9ca3-ea4f26848114",
+  "name": "Sidebar Tweaks",
+  "description": "Toggleable tweaks for the sidebar",
+  "homepage": "https://github.com/MihkelMK/zen-mods/tree/main/sidebar_tweaks",
+  "style": "https://raw.githubusercontent.com/MihkelMK/zen-mods/main/sidebar_tweaks/chrome.css",
+  "readme": "https://raw.githubusercontent.com/MihkelMK/zen-mods/main/sidebar_tweaks/readme.md",
+  "image": "https://raw.githubusercontent.com/MihkelMK/zen-mods/main/sidebar_tweaks/image.png",
+  "author": "MihkelMK",
+  "version": "1.1.0",
+  "tags": [],
+  "createdAt": "2025-03-07",
+  "updatedAt": "2025-03-25",
+  "preferences": "https://raw.githubusercontent.com/MihkelMK/zen-mods/main/sidebar_tweaks/preferences.json"
+}

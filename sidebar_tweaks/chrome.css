@@ -1,4 +1,4 @@
-@media (-moz-bool-pref: "uc.workspace-tweaks.sidebar-flush") {
+@media (-moz-bool-pref: "uc.sidebar-tweaks.sidebar-flush") {
   /* This style is only needed with Multiple toolbar layout  */
   /* in which case #nav-bar is in #zen-appcontent-wrapper instead */
   #navigator-toolbox:not(:has(#nav-bar)) {
@@ -9,7 +9,7 @@
   }
 }
 
-@media (-moz-bool-pref: "uc.workspace-tweaks.sidebar-margin") {
+@media (-moz-bool-pref: "uc.sidebar-tweaks.sidebar-margin") {
   #zen-main-app-wrapper[zen-compact-mode="true"] {
     & #navigator-toolbox:not(:has(#nav-bar)) #titlebar {
       margin-top: calc(var(--zen-element-separation) * 2) !important;
@@ -19,19 +19,19 @@
   #navigator-toolbox:not(:has(#nav-bar)) #titlebar {
     margin-top: calc(var(--zen-element-separation) / 2) !important;
 
-    @media (-moz-bool-pref: "uc.workspace-tweaks.bottom-essentials") {
+    @media (-moz-bool-pref: "uc.sidebar-tweaks.bottom-essentials") {
       margin-top: var(--zen-element-separation) !important;
     }
   }
 }
 
-@media (-moz-bool-pref: "uc.workspace-tweaks.top-center") {
+@media (-moz-bool-pref: "uc.sidebar-tweaks.top-indicator-align-center") {
   #zen-current-workspace-indicator-container .zen-current-workspace-indicator {
     justify-content: center;
   }
 }
 
-:root:has(#theme-Workspace-Tweaks[uc-workspace-tweaks-bottom-style="compact"]) {
+:root:has(#theme-Sidebar-Tweaks[uc-sidebar-tweaks-bottom-style="compact"]) {
   #zen-sidebar-bottom-buttons {
     padding: 0 var(--zen-toolbox-padding) !important;
     margin-top: var(--zen-toolbox-padding) !important;
@@ -48,7 +48,7 @@
     margin-top: calc(var(--zen-toolbox-padding) / 2) !important;
   }
 
-  @media (-moz-bool-pref: "uc.workspace-tweaks.bottom-essentials") {
+  @media (-moz-bool-pref: "uc.sidebar-tweaks.bottom-essentials") {
     #zen-essentials-container {
       padding-block: calc(var(--zen-toolbox-padding) / 2)
         var(--zen-toolbox-padding) !important;
@@ -65,7 +65,7 @@
   }
 }
 
-:root:has(#theme-Workspace-Tweaks[uc-workspace-tweaks-bottom-style="pill"]) {
+:root:has(#theme-Sidebar-Tweaks[uc-sidebar-tweaks-bottom-style="pill"]) {
   #zen-sidebar-bottom-buttons {
     padding: 3px 6px !important;
     border-radius: var(--border-radius-medium);
@@ -100,7 +100,7 @@
     }
   }
 
-  @media (-moz-bool-pref: "uc.workspace-tweaks.bottom-essentials") {
+  @media (-moz-bool-pref: "uc.sidebar-tweaks.bottom-essentials") {
     #zen-essentials-container {
       padding-block: calc(var(--zen-toolbox-padding) / 2)
         var(--zen-toolbox-padding) !important;
