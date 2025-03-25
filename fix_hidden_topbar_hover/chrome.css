@@ -1,7 +1,0 @@
-#zen-appcontent-navbar-container[should-hide] {
-  height: var(--zen-element-separation) !important;
-
-  .titlebar-buttonbox-container {
-    display: none !important;
-  }
-}
