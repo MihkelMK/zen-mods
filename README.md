@@ -57,14 +57,8 @@ Inspired by [Cleaner Extension Menu - Zen Mods](https://zen-browser.app/mods/1e8
 
 ![Screenshot of customized downloads menu](https://raw.githubusercontent.com/MihkelMK/zen-mods/refs/heads/main/cleaner_downloads/image.png)
 
-## Fix Hidden Topbar Hover
+## Top Bar Tweaks
 
-Don't reveal the top bar when hovered in the "Single toolbar" layout
+Small fixes for the top Nav Bar.
 
-![Screenshot of topbar appearing when hovered](https://raw.githubusercontent.com/MihkelMK/zen-mods/refs/heads/main/fix_hidden_topbar_hover/image.png)
-
-## Even URLbar Padding
-
-Fix spacing of icons and URL in the top bar
-
-![Screenshot of modified top URL bar](https://raw.githubusercontent.com/MihkelMK/zen-mods/refs/heads/main/even_urlbar_padding/image.png)
+![Screenshot of modified topbar](https://raw.githubusercontent.com/MihkelMK/zen-mods/refs/heads/main/topbar_tweaks/image.png)

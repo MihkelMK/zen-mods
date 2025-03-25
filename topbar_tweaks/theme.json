@@ -1,0 +1,15 @@
+{
+  "id": "52b3aaf6-ff5d-11ef-8f34-6b40ca385589",
+  "name": "Topbar Tweaks",
+  "description": "Small fixes for the top Nav Bar",
+  "homepage": "https://github.com/MihkelMK/zen-mods/tree/main/topbar_tweaks",
+  "style": "https://raw.githubusercontent.com/MihkelMK/zen-mods/main/topbar_tweaks/chrome.css",
+  "readme": "https://raw.githubusercontent.com/MihkelMK/zen-mods/main/topbar_tweaks/readme.md",
+  "image": "https://raw.githubusercontent.com/MihkelMK/zen-mods/main/topbar_tweaks/image.png",
+  "preferences": "https://raw.githubusercontent.com/MihkelMK/zen-mods/main/topbar_tweaks/preferences.json",
+  "author": "MihkelMK",
+  "version": "1.0.0",
+  "tags": [],
+  "createdAt": "2025-03-07",
+  "updatedAt": "2025-03-07"
+}
