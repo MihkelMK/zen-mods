@@ -1,13 +1,13 @@
 [
   {
-    "property": "zen.workspaces.show-workspace-indicator",
-    "label": "Shows the workspace-indicator above Pins.",
+    "property": "uc.workspace-tweaks.bottom-essentials",
+    "label": "Turn on if you have Bottom Essentials installed",
     "type": "checkbox",
     "disabledOn": []
   },
   {
-    "property": "uc.workspace-tweaks.top-pad-rm",
-    "label": "Remove padding from sidebar start. Looks best with Bottom Essentials.",
+    "property": "zen.workspaces.show-workspace-indicator",
+    "label": "Shows the workspace-indicator above Pins.",
     "type": "checkbox",
     "disabledOn": []
   },
@@ -18,21 +18,33 @@
     "disabledOn": []
   },
   {
-    "property": "uc.workspace-tweaks.bottom-pad",
-    "label": "Add padding to the bottom workspace icons",
+    "property": "uc.workspace-tweaks.sidebar-flush",
+    "label": "Make sidebar flush with navigation bar",
     "type": "checkbox",
     "disabledOn": []
   },
   {
-    "property": "uc.workspace-tweaks.top-bg",
-    "label": "Add a background to the top workspace-indicator label.",
+    "property": "uc.workspace-tweaks.sidebar-margin",
+    "label": "Add top margin to sidebar (Useful with NavBar Margin mod)",
     "type": "checkbox",
     "disabledOn": []
   },
   {
-    "property": "uc.workspace-tweaks.bottom-bg",
-    "label": "Add a background to the bottom workspace-indicator label.",
-    "type": "checkbox",
-    "disabledOn": []
+    "property": "uc.workspace-tweaks.bottom-style",
+    "label": "Change styling of bottom workspace and settings bar (try with media player)",
+    "type": "dropdown",
+    "placeholder": "Zen Default",
+    "defaultValue": "default",
+    "disabledOn": [],
+    "options": [
+      {
+        "label": "Similar to media player",
+        "value": "pill"
+      },
+      {
+        "label": "Compact",
+        "value": "compact"
+      }
+    ]
   }
 ]
