@@ -51,5 +51,15 @@
     "image": "https://raw.githubusercontent.com/MihkelMK/zen-mods/main/cleaner_downloads/image.png",
     "author": "MihkelMK",
     "version": "1.0.0"
+  },
+  "Icons Only Pins": {
+    "name": "Icon Only Pins",
+    "description": "Change pinned tabs to a horizontal list of icons.",
+    "homepage": "https://github.com/MihkelMK/zen-mods/tree/main/icon_only_pins",
+    "style": "https://raw.githubusercontent.com/MihkelMK/zen-mods/main/icon_only_pins/chrome.css",
+    "readme": "https://raw.githubusercontent.com/MihkelMK/zen-mods/main/icon_only_pins/README.md",
+    "image": "https://raw.githubusercontent.com/MihkelMK/zen-mods/main/icon_only_pins/image.png",
+    "author": "MihkelMK",
+    "version": "1.0.0"
   }
 }
