@@ -1,5 +1,6 @@
 {
   "Topbar Tweaks": {
+    "name": "Topbar Tweaks",
     "description": "Small fixes for the top Nav Bar",
     "homepage": "https://github.com/MihkelMK/zen-mods/tree/main/topbar_tweaks",
     "style": "https://raw.githubusercontent.com/MihkelMK/zen-mods/main/topbar_tweaks/chrome.css",
@@ -10,6 +11,7 @@
     "version": "1.0.0"
   },
   "Thin Settings Sidebar": {
+    "name": "Thin Settings Sidebar",
     "description": "Collapse settings sidebar into icons only with a floating search box on smaller screens.",
     "homepage": "https://github.com/MihkelMK/zen-mods/tree/main/thin_settings_sidebar",
     "style": "https://raw.githubusercontent.com/MihkelMK/zen-mods/main/thin_settings_sidebar/chrome.css",
@@ -19,6 +21,7 @@
     "version": "1.0.0"
   },
   "Sidebar Tweaks": {
+    "name": "Sidebar Tweaks",
     "description": "Toggleable tweaks for the sidebar",
     "homepage": "https://github.com/MihkelMK/zen-mods/tree/main/sidebar_tweaks",
     "style": "https://raw.githubusercontent.com/MihkelMK/zen-mods/main/sidebar_tweaks/chrome.css",
@@ -29,6 +32,7 @@
     "version": "1.1.0"
   },
   "Container Tab Tweaks": {
+    "name": "Container Tab Tweaks",
     "description": "Customize when and where the tab container indicator is displayed.",
     "homepage": "https://github.com/MihkelMK/zen-mods/tree/main/container_tab_tweaks",
     "style": "https://raw.githubusercontent.com/MihkelMK/zen-mods/main/container_tab_tweaks/chrome.css",
@@ -39,6 +43,7 @@
     "version": "1.0.0"
   },
   "Cleaner Downloads": {
+    "name": "Cleaner Downloads",
     "description": "Clean up the recent downloads menu.",
     "homepage": "https://github.com/MihkelMK/zen-mods/tree/main/cleaner_downloads",
     "style": "https://raw.githubusercontent.com/MihkelMK/zen-mods/main/cleaner_downloads/chrome.css",
